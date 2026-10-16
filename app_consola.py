@@ -54,6 +54,11 @@ def deshacer_ultima_atencion():
 print("Restaurada:", deshacer_ultima_atencion())
 mostrar_estado()
 
+def consultar_sigueinte():
+    if not cola_pendientes:
+        return None
+    return cola_pendientes[0]
+
 def ejecutar_menu():
     while True:
         print("\n1. Registrar solicitud")
