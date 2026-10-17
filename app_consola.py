@@ -54,10 +54,25 @@ def deshacer_ultima_atencion():
 print("Restaurada:", deshacer_ultima_atencion())
 mostrar_estado()
 
-def consultar_sigueinte():
+def consultar_siguiente():
     if not cola_pendientes:
         return None
     return cola_pendientes[0]
+
+def buscar_solicitud(id_solicitud):
+    for solicitud in cola_pendientes:
+        if solicitud["id"] == id_solicitud:
+            return "Cola pendientes"
+    for solicitud in pila_historial:
+        if solicitud["id"] == id_solicitud:
+            return "Historial"
+    return None
+
+def cancelar_pendiente(id_solicitud):
+    for i, solicitud in cola_pendientes:
+        if solicitud["id"] == id_solicitud:
+            return cola_pendientes.pop(i)
+    return None
 
 def ejecutar_menu():
     while True:
@@ -66,6 +81,7 @@ def ejecutar_menu():
         print("3. Deshacer última atención")
         print("4. Mostrar estado")
         print("5. Salir")
+        print("6. buscar solicitud")
         opcion = input("Opción: ").strip()
 
         if opcion == "1":
@@ -81,6 +97,8 @@ def ejecutar_menu():
             mostrar_estado()
         elif opcion == "5":
             break
+        elif opcion == "6":
+            print("Ingresa el id: ", buscarSolicitud())
         else:
             print("Opción inválida")
 
