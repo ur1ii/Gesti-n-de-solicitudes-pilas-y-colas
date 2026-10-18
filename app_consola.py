@@ -50,7 +50,6 @@ def deshacer_ultima_atencion():
     cola_pendientes.insert(0, solicitud)
     return solicitud
 
-
 print("Restaurada:", deshacer_ultima_atencion())
 mostrar_estado()
 
@@ -73,6 +72,19 @@ def cancelar_pendiente(id_solicitud):
         if solicitud["id"] == id_solicitud:
             return cola_pendientes.pop(i)
     return None
+def deshacer_varias(cantidad):
+    if not isinstance(cantidad, int) or cantidad <= 0:
+        print("La cantidad debe ser un entero positivo mayor a 0.")
+        return 0
+
+    restauradas = 0
+    for _ in range(cantidad):
+        resultado = deshacer_ultima_atencion()
+        if resultado is None:
+            break  
+        restauradas += 1
+
+    return restauradas
 
 def ejecutar_menu():
     while True:
