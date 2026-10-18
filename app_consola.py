@@ -72,11 +72,11 @@ def cancelar_pendiente(id_solicitud):
         if solicitud["id"] == id_solicitud:
             return cola_pendientes.pop(i)
     return None
+
 def deshacer_varias(cantidad):
     if not isinstance(cantidad, int) or cantidad <= 0:
         print("La cantidad debe ser un entero positivo mayor a 0.")
         return 0
-
     restauradas = 0
     for _ in range(cantidad):
         resultado = deshacer_ultima_atencion()
@@ -85,6 +85,17 @@ def deshacer_varias(cantidad):
         restauradas += 1
 
     return restauradas
+
+def obtener_estadisticas():
+    pendientes = len(cola_pendientes)
+    historial = len(pila_historial)
+    total_unicas = pendientes + historial
+    
+    return {
+        "pendientes": pendientes,
+        "historial": historial,
+        "total_unicas": total_unicas
+    }
 
 def ejecutar_menu():
     while True:
@@ -110,7 +121,7 @@ def ejecutar_menu():
         elif opcion == "5":
             break
         elif opcion == "6":
-            print("Ingresa el id: ", buscarSolicitud())
+            print("Ingresa el id: ", buscar_solicitud())
         else:
             print("Opción inválida")
 
