@@ -48,14 +48,14 @@ def consultar_siguiente():
 def buscar_solicitud(id_solicitud):
     for solicitud in cola_pendientes:
         if solicitud["id"] == id_solicitud:
-            return "Cola pendientes"
+            return solicitud, "Cola pendientes"
     for solicitud in pila_historial:
         if solicitud["id"] == id_solicitud:
-            return "Historial"
+            return solicitud, "Historial"
     return None
 
 def cancelar_pendiente(id_solicitud):
-    for i, solicitud in cola_pendientes:
+    for i, solicitud in enumerate(cola_pendientes):
         if solicitud["id"] == id_solicitud:
             return cola_pendientes.pop(i)
     return None
